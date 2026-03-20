@@ -55,7 +55,7 @@ Wichtige Erkenntnisse aus der Entwicklung:
 
 Daher werden alle Assets über GitHub Pages bereitgestellt:
 
-[https://tim-app-innovators.github.io/app-innovators-signature-generator/assets/]
+https://tim-app-innovators.github.io/app-innovators-signature-generator/assets/
 
 - assets/ → Icons und Logo (öffentlich erreichbar)
 - demoindex.html → klickbare Demo für Stakeholder
@@ -96,4 +96,4 @@ Für einen produktiven Einsatz wird empfohlen:
 ## 👤 Autor
 
 Prototyp entwickelt von  
-[Tim Weisheit]
+Tim Weisheit

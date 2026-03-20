@@ -57,9 +57,9 @@ Daher werden alle Assets über GitHub Pages bereitgestellt:
 
 [https://tim-app-innovators.github.io/app-innovators-signature-generator/assets/]
 
-assets/ → Icons und Logo (öffentlich erreichbar)
-demoindex.html → klickbare Demo für Stakeholder
-app/ → eigentliche Generator-Logik (React)
+- assets/ → Icons und Logo (öffentlich erreichbar)
+- demoindex.html → klickbare Demo für Stakeholder
+- app/ → eigentliche Generator-Logik (React)
 
 ---
 

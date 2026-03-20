@@ -1,6 +1,8 @@
 # App Innovators – Signatur Generator
 
-Ein Web-Tool zur Erstellung CI-konformer E-Mail-Signaturen für App Innovators.
+Ein Web-Tool zur Erstellung CI-konformer E-Mail-Signaturen für App-Innovators.
+
+---
 
 ## 🚀 Ziel
 
@@ -11,13 +13,34 @@ Erstellung von E-Mail-Signaturen, die:
 
 ---
 
-## 🧪 Aktueller Status
+## 🧪 Demo
 
-- ✅ Generator-Logik implementiert
-- ✅ Live Preview vorhanden
-- ✅ Copy-to-Clipboard funktioniert
-- ✅ Outlook-Kompatibilität sichergestellt
-- ✅ Icons und Logo über öffentliche URLs eingebunden (GitHub Pages)
+Eine vereinfachte Demo-Version befindet sich im Repository:
+
+`DEMOindex.html`
+
+Diese Version dient ausschließlich dazu, das Tool direkt im Browser zu testen:
+- ohne Setup
+- ohne Entwickler-Umgebung
+- sofort klickbar über GitHub Pages
+
+👉 Wichtig:  
+Die Demo ist funktional korrekt, aber technisch vereinfacht und **nicht für die Weiterentwicklung gedacht**.
+
+---
+
+## 🧠 Produktive Version (für Entwickler)
+
+Die eigentliche, weiterzuentwickelnde Version liegt hier:
+
+`app/signature-generator.tsx`
+
+Diese Version enthält:
+- die vollständige Logik
+- strukturierte Komponenten
+- die Grundlage für eine produktive Integration
+
+👉 Für die Weiterentwicklung und den finalen Einsatz sollte **ausschließlich diese Version verwendet werden**.
 
 ---
 
@@ -34,11 +57,9 @@ Daher werden alle Assets über GitHub Pages bereitgestellt:
 
 https://tim-app-innovators.github.io/app-innovators-signature-generator/assets/
 
----
-
-## 📁 Projektstruktur
-assets/ → Icons und Logo (öffentlich erreichbar über GitHub Pages)
-app/ → Generator-Code (React-Komponente)
+assets/ → Icons und Logo (öffentlich erreichbar)
+demoindex.html → klickbare Demo für Stakeholder
+app/ → eigentliche Generator-Logik (React)
 
 ---
 
@@ -65,13 +86,14 @@ Nach dem Einfügen sollte die Signatur kurz geprüft werden:
 
 Für einen produktiven Einsatz wird empfohlen:
 
-- Migration des Repositories in das Firmen-GitHub
+- Migration des Repositories in das App-Inventors-GitHub
 - Hosting der Assets über Firmen-Infrastruktur (z. B. CDN oder Webserver)
 - Anpassung der Asset-URLs im Code
-- Optional: Deployment auf Firmen-Domain
+- Integration der React-Version in bestehende Systeme oder Deployment als internes Tool
 
 ---
 
 ## 👤 Autor
 
-Prototyp entwickelt von Tim Weisheit
+Prototyp entwickelt von  
+[Tim Weisheit]

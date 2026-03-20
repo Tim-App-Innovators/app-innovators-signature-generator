@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App Innovators – Signatur Generator</title>
+    <style>
+      :root {
+        --primary: #4134e2;
+        --text: #352f5b;
+        --muted: #64748b;
+        --border: #e2e8f0;
+        --bg: #f8fafc;
+        --card: #ffffff;
+        --success: #059669;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .page {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 420px minmax(0, 1fr);
+        gap: 24px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+      }
+
+      .card-header {
+        padding: 24px 24px 0 24px;
+      }
+
+      .card-title {
+        margin: 0 0 6px 0;
+        font-size: 24px;
+        line-height: 1.2;
+        color: var(--text);
+      }
+
+      .card-description {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .card-content {
+        padding: 24px;
+      }
+
+      .stack {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .notice {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        border: 1px solid var(--border);
+        background: var(--bg);
+        border-radius: 16px;
+        padding: 12px 14px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .notice-dot {
+        width: 18px;
+        height: 18px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        font-weight: bold;
+        flex: 0 0 auto;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .label {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .input-wrap {
+        position: relative;
+      }
+
+      .input-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #94a3b8;
+        font-size: 14px;
+      }
+
+      .input {
+        width: 100%;
+        height: 44px;
+        padding: 0 12px 0 38px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        font-size: 14px;
+        color: var(--text);
+        background: white;
+      }
+
+      .input:focus {
+        outline: 2px solid rgba(65, 52, 226, 0.15);
+        border-color: var(--primary);
+      }
+
+      .hint {
+        margin: 0;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .button {
+        width: 100%;
+        height: 46px;
+        border: 0;
+        border-radius: 14px;
+        background: var(--primary);
+        color: white;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .button:hover {
+        filter: brightness(0.96);
+      }
+
+      .feedback {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .feedback.success {
+        color: var(--success);
+      }
+
+      .preview-shell {
+        border: 1px solid var(--border);
+        background: white;
+        border-radius: 20px;
+        padding: 32px;
+        overflow: auto;
+      }
+
+      .preview-note {
+        margin-top: 16px;
+        border: 1px solid var(--border);
+        background: var(--bg);
+        border-radius: 16px;
+        padding: 14px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      @media (max-width: 980px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="layout">
+        <section class="card">
+          <div class="card-header">
+            <h1 class="card-title">Signatur-Generator</h1>
+            <p class="card-description">Erstelle Deine CI-konforme Signatur.</p>
+          </div>
+          <div class="card-content">
+            <div class="stack">
+              <div class="notice">
+                <span class="notice-dot">i</span>
+                <span>Die Vorschau startet mit Beispieldaten.</span>
+              </div>
+
+              <div class="field">
+                <label class="label" for="name">Name</label>
+                <div class="input-wrap">
+                  <span class="input-icon">👤</span>
+                  <input class="input" id="name" value="Max Mustermann" />
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="label" for="position">Position</label>
+                <div class="input-wrap">
+                  <span class="input-icon">💼</span>
+                  <input class="input" id="position" value="Projektmanager" />
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="label" for="phone">Mobilnummer</label>
+                <div class="input-wrap">
+                  <span class="input-icon">📞</span>
+                  <input class="input" id="phone" value="+49 151 23456789" />
+                </div>
+                <p class="hint">Wird für Telefon- und WhatsApp-Link formatiert.</p>
+              </div>
+
+              <div class="field">
+                <label class="label" for="email">E-Mail</label>
+                <div class="input-wrap">
+                  <span class="input-icon">✉️</span>
+                  <input class="input" id="email" value="max.mustermann@app-innovators.de" />
+                </div>
+              </div>
+
+              <button class="button" id="copyButton">Signatur kopieren</button>
+
+              <div class="feedback" id="feedback">
+                <span>●</span>
+                <span id="feedbackText">Bereit zum Kopieren.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <h2 class="card-title">Live Preview</h2>
+            <p class="card-description">Die Vorschau zeigt Deine Signatur mit den echten Bild-Assets.</p>
+          </div>
+          <div class="card-content">
+            <div class="preview-shell">
+              <div id="preview"></div>
+            </div>
+            <div class="preview-note">Daten anpassen → Signatur kopieren → in Dein Mailprogramm einfügen.</div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      const githubBase = "https://tim-app-innovators.github.io/app-innovators-signature-generator/assets";
+      const logoSrc = `${githubBase}/Logo_primary_clean.png`;
+      const whatsappIconSrc = `${githubBase}/icon_awesome_whatsapp.png`;
+      const phoneIconSrc = `${githubBase}/icon_feather_phone.png`;
+      const mailIconSrc = `${githubBase}/icon_feather_mail.png`;
+      const globeIconSrc = `${githubBase}/icon_feather_globe.png`;
+      const linkedinIconSrc = `${githubBase}/Linkedin.png`;
+      const instagramIconSrc = `${githubBase}/Instagram.png`;
+      const linkedinHref = "https://www.linkedin.com/company/appinnovators/";
+      const instagramHref = "https://www.instagram.com/appinnovators.de/";
+      const websiteHref = "https://app-innovators.de";
+      const BRAND_PRIMARY = "#4134e2";
+      const BRAND_TEXT = "#352f5b";
+      const DEFAULT_PHONE = "+49 151 23456789";
+
+      const nameInput = document.getElementById("name");
+      const positionInput = document.getElementById("position");
+      const phoneInput = document.getElementById("phone");
+      const emailInput = document.getElementById("email");
+      const preview = document.getElementById("preview");
+      const copyButton = document.getElementById("copyButton");
+      const feedback = document.getElementById("feedback");
+      const feedbackText = document.getElementById("feedbackText");
+
+      function formatDisplayNumber(value) {
+        const digits = value.replace(/\D/g, "");
+        if (!digits) return "";
+
+        let normalized = digits;
+        if (normalized.startsWith("00")) normalized = normalized.slice(2);
+        if (normalized.startsWith("0")) normalized = `49${normalized.slice(1)}`;
+        if (!normalized.startsWith("49")) normalized = `49${normalized}`;
+
+        const local = normalized.slice(2);
+        if (local.length <= 3) return `+49 ${local}`;
+        if (local.length <= 7) return `+49 ${local.slice(0, 3)} ${local.slice(3)}`;
+        return `+49 ${local.slice(0, 3)} ${local.slice(3, 7)} ${local.slice(7)}`.trim();
+      }
+
+      function normalizePhoneLink(value) {
+        const digits = value.replace(/\D/g, "");
+        if (!digits) return "";
+        let normalized = digits;
+        if (normalized.startsWith("00")) normalized = normalized.slice(2);
+        if (normalized.startsWith("0")) normalized = `49${normalized.slice(1)}`;
+        if (!normalized.startsWith("49")) normalized = `49${normalized}`;
+        return `+${normalized}`;
+      }
+
+      function normalizeWhatsappLink(value) {
+        return normalizePhoneLink(value).replace(/^\+/, "");
+      }
+
+      function escapeHtml(value) {
+        return value
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function buildSignatureHtml({ name, position, phone, email }) {
+        const safeName = escapeHtml(name || "Max Mustermann");
+        const safePosition = escapeHtml(position || "Projektmanager");
+        const safeEmail = escapeHtml(email || "max.mustermann@app-innovators.de");
+        const phoneDisplay = escapeHtml(formatDisplayNumber(phone) || DEFAULT_PHONE);
+        const phoneHref = normalizePhoneLink(phone) || normalizePhoneLink(DEFAULT_PHONE);
+        const whatsappHref = normalizeWhatsappLink(phone) || normalizeWhatsappLink(DEFAULT_PHONE);
+
+        return `
+<table cellpadding="0" cellspacing="0" border="0" style="vertical-align: -webkit-baseline-middle; font-family: Arial;">
+  <tbody>
+    <tr>
+      <td>
+        <table cellpadding="0" cellspacing="0" border="0" style="vertical-align: -webkit-baseline-middle; font-family: Arial;">
+          <tbody>
+            <tr>
+              <td width="5">
+                <table cellpadding="0" cellspacing="0" border="0" style="width:100%"><tbody><tr><td height="310"></td></tr></tbody></table>
+              </td>
+              <td style="padding:0; vertical-align:middle;">
+                <img src="${logoSrc}" alt="App Innovators" width="230" style="display:block; border:0;">
+                <table cellpadding="0" cellspacing="0" border="0" style="width:100%"><tbody><tr><td height="20"></td></tr></tbody></table>
+                <div style="margin:0; font-size:20px; color:${BRAND_PRIMARY}; font-family:Arial, sans-serif; font-weight:700; line-height:24px;">${safeName}</div>
+                <div style="margin:0; color:${BRAND_TEXT}; font-size:15px; line-height:22px; font-family:Arial, sans-serif; font-weight:400;">${safePosition}</div>
+                <table cellpadding="0" cellspacing="0" border="0" style="width:100%"><tbody><tr><td height="20"></td></tr></tbody></table>
+                <table cellpadding="0" cellspacing="0" border="0" style="font-family:Arial; margin-left:-5px;">
+                  <tbody>
+                    <tr height="25" style="vertical-align:middle;"><td width="20" style="vertical-align:middle;"><img src="${whatsappIconSrc}" alt="Whatsapp" height="13" style="display:inline-block; border:0;"></td><td><a href="https://wa.me/${whatsappHref}" style="text-decoration:none !important; color:${BRAND_TEXT}; font-size:13px; line-height:25px; font-family:Arial, sans-serif;">${phoneDisplay}</a></td></tr>
+                    <tr height="25" style="vertical-align:middle;"><td width="20" style="vertical-align:middle;"><img src="${phoneIconSrc}" alt="Telefon" height="13" style="display:inline-block; border:0;"></td><td><a href="tel:${phoneHref}" style="text-decoration:none !important; color:${BRAND_TEXT}; font-size:13px; line-height:25px; font-family:Arial, sans-serif;">${phoneDisplay}</a></td></tr>
+                    <tr height="25" style="vertical-align:middle;"><td width="30" style="vertical-align:middle;"><img src="${mailIconSrc}" alt="Mail" height="10" style="display:inline-block; border:0;"></td><td><a href="mailto:${safeEmail}" style="text-decoration:none !important; color:${BRAND_TEXT}; font-size:13px; line-height:25px; font-family:Arial, sans-serif;">${safeEmail}</a></td></tr>
+                    <tr height="25" style="vertical-align:middle;"><td width="30" style="vertical-align:middle;"><img src="${globeIconSrc}" alt="Webseite" height="13" style="display:inline-block; border:0;"></td><td><a href="${websiteHref}" style="text-decoration:none !important; color:${BRAND_TEXT}; font-size:13px; line-height:25px; font-family:Arial, sans-serif;">app-innovators.de</a></td></tr>
+                  </tbody>
+                </table>
+                <table cellpadding="0" cellspacing="0" border="0" style="width:100%"><tbody><tr><td height="10"></td></tr></tbody></table>
+                <table cellpadding="0" cellspacing="0" border="0" style="font-family:Arial; margin-left:-5px;">
+                  <tbody>
+                    <tr height="55">
+                      <td width="40" style="vertical-align:middle;"><a href="${linkedinHref}" target="_blank"><img src="${linkedinIconSrc}" alt="LinkedIn" height="25" style="display:inline-block; border:0;"></a></td>
+                      <td style="vertical-align:middle;"><a href="${instagramHref}" target="_blank"><img src="${instagramIconSrc}" alt="Instagram" height="25" style="display:inline-block; border:0;"></a></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table cellpadding="0" cellspacing="0" border="0" style="display:block; margin-top:15px;">
+                  <tbody>
+                    <tr>
+                      <td style="vertical-align:bottom;">
+                        <span style="display:block; text-decoration:none !important; color:${BRAND_TEXT}; font-size:11px; line-height:16px; font-family:Arial, sans-serif; font-weight:400;">
+                          <span style="opacity:1 !important;">App Innovators Solutions GmbH<br></span>
+                          <span style="opacity:.5;">Friedrichstrasse 13, 70174 Stuttgart | Amtsgericht Stuttgart | HRB 783408<br></span>
+                          <span style="opacity:.5;">Geschäftsführer: Tim König</span><br><br>
+                          <span style="opacity:.75;">For international clients:</span><br>
+                          <span style="opacity:1 !important;">App Innovators International Ventures OÜ</span><br>
+                          <span style="opacity:.5;">Keemia tn 4, 10616 Tallinn, Estonia</span><br>
+                          <span style="opacity:.5;">Management board member: David Forster</span>
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>`.trim();
+      }
+
+      function updatePreview() {
+        preview.innerHTML = buildSignatureHtml({
+          name: nameInput.value,
+          position: positionInput.value,
+          phone: phoneInput.value,
+          email: emailInput.value,
+        });
+      }
+
+      async function copyHtmlToClipboard(html) {
+        if (navigator.clipboard && window.ClipboardItem) {
+          try {
+            const blobHtml = new Blob([html], { type: "text/html" });
+            const blobText = new Blob([html], { type: "text/plain" });
+            await navigator.clipboard.write([
+              new ClipboardItem({
+                "text/html": blobHtml,
+                "text/plain": blobText,
+              }),
+            ]);
+            return true;
+          } catch (err) {}
+        }
+
+        return new Promise((resolve) => {
+          const listener = (event) => {
+            event.preventDefault();
+            event.clipboardData?.setData("text/html", html);
+            event.clipboardData?.setData("text/plain", html);
+          };
+          document.addEventListener("copy", listener);
+          const success = document.execCommand("copy");
+          document.removeEventListener("copy", listener);
+          resolve(success);
+        });
+      }
+
+      [nameInput, positionInput, phoneInput, emailInput].forEach((input) => {
+        input.addEventListener("input", updatePreview);
+      });
+
+      copyButton.addEventListener("click", async () => {
+        const html = buildSignatureHtml({
+          name: nameInput.value,
+          position: positionInput.value,
+          phone: phoneInput.value,
+          email: emailInput.value,
+        });
+        const success = await copyHtmlToClipboard(html);
+        if (success) {
+          copyButton.textContent = "✓ Kopiert";
+          feedback.classList.add("success");
+          feedbackText.textContent = "Signatur kopiert. Jetzt in Dein Mailprogramm einfügen.";
+          setTimeout(() => {
+            copyButton.textContent = "Signatur kopieren";
+          }, 2000);
+        } else {
+          feedback.classList.remove("success");
+          feedbackText.textContent = "Kopieren hat nicht geklappt. Bitte die Vorschau markieren und manuell kopieren.";
+        }
+      });
+
+      updatePreview();
+    </script>
+  </body>
+</html>
